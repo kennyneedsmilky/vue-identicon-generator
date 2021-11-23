@@ -3,19 +3,19 @@
     <h3>{{ title }}</h3>
     
     <div>
-      <output-identicon :output="inputMsg"></output-identicon>
+      <output-identicon :output="svgString"></output-identicon>
     </div>
 
     <div class="input">
       <h4>Write your name here:</h4>
-      <input type="text" v-model="inputMsg" @input="updateIdenticon" />
+      <input type="text" maxlength="20" placeholder="ex: Kenny" v-model="inputMsg" @input="updateIdenticon" />
     </div>
 
   </div>
 </template>
 
 <script>
-require('./assets/js/jdenticon.min.js');
+// Components
 import OutputIdenticon from "./components/OutputIdenticon.vue";
 export default {
   name: 'App',
@@ -26,14 +26,12 @@ export default {
     return {
       title: "Identicon Generator",
       inputMsg: "",
+      svgString: "",
     }
-  },
-  computed: {
-
   },
   methods: {
     updateIdenticon() {
-
+      this.svgString = this.$toSvg( this.inputMsg, 100);
     }
   },
 }
@@ -52,6 +50,27 @@ export default {
     align-items: center;
     background-color: whitesmoke;
     height: 100vh;
+  }
+
+  h2,h3,h4 {
+    padding: 10px;
+  }
+
+  input {
+    padding: 0 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 10px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  input:focus {
+    border: 1px solid whitesmoke;
+    outline: none;
+    outline-style: solid;
+    outline-color: rgb(255, 0, 43);
   }
 
   .view {
