@@ -1,90 +1,131 @@
 <template>
-  <div class="view">
-    <h3>{{ title }}</h3>
-    
-    <div>
-      <output-identicon :output="svgString"></output-identicon>
+  <div class=page-view>
+    <div class="identicon-list">
+      <page-section-header></page-section-header>
+      <output-identicon v-for="identicon in identiconList" :key="identicon" :identiconListNumber="identicon"></output-identicon>
+      <page-section-footer @setGenerators="setGeneratorNumbers"></page-section-footer>
     </div>
-
-    <div class="input">
-      <h4>Write your name here:</h4>
-      <input type="text" maxlength="20" placeholder="ex: Kenny" v-model="inputMsg" @input="updateIdenticon" />
-    </div>
-
   </div>
 </template>
 
 <script>
 // Components
 import OutputIdenticon from "./components/OutputIdenticon.vue";
+import PageSectionHeader from "./components/PageSectionHeader.vue";
+import PageSectionFooter from "./components/PageSectionFooter.vue";
 export default {
   name: 'App',
   components: {
-    OutputIdenticon
+    OutputIdenticon,
+    PageSectionHeader,
+    PageSectionFooter,
   },
   data() {
     return {
       title: "Identicon Generator",
-      inputMsg: "",
-      svgString: "",
+      identiconQuantity: 1,
     }
   },
+  computed: {
+    identiconList() {
+      const identiconListArray = [];
+      for (let i = 0; i < this.identiconQuantity; i++) {
+        identiconListArray.push(i);
+      }
+      return identiconListArray;
+    },
+  },
   methods: {
-    updateIdenticon() {
-      this.svgString = this.$toSvg( this.inputMsg, 100);
+    setGeneratorNumbers(num) {
+      this.identiconQuantity = Number(num);
     }
   },
 }
 </script>
 
 <style>
+  @import url("./assets/css/kenmil.css");
+
   * {
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  ::-webkit-scrollbar { /* Chrome, Safari, newer versions of Opera */
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track { /* color of the tracking area */
+    background: #000000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 1px solid #ffffff;    /* creates padding around scroll thumb */
+    border-radius: 10px;            /* roundness of the scroll thumb */
+    background-color: #6666ff;    /* color of the scroll thumb */
+  }
+
+  a {
+    color: #ffffff;
+    transition: 0.1s;
+  }
+
+  a:active {
+    transform: scale(1.1);
   }
 
   body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
-    height: 100vh;
+    background-color: #f5f5f5;
   }
 
-  h2,h3,h4 {
-    padding: 10px;
+  h1,h2,h3,h4,h5,h6 {
+    padding: 0.5rem;
   }
 
   input {
     padding: 0 10px;
-    border: 1px solid gray;
+    border: 1px solid #808080;
     border-radius: 10px;
     margin: 10px;
-    height: 32px;
-    font-size: 16px;
+    width: calc(100% - 20px);
+    height: 2rem;
+    min-height: 48px;
+    font-size: 1.25rem;
     font-weight: bold;
   }
 
   input:focus {
-    border: 1px solid whitesmoke;
+    border: 1px solid #f5f5f5;
     outline: none;
     outline-style: solid;
-    outline-color: rgb(255, 0, 43);
+    outline-color: #ff002b;
   }
 
-  .view {
-    padding: 20px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 1px 1px 5px gray;
-    max-width: 300px;
+  .identicon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 
-  .view, .input {
+  .page-view {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin: 48px 0;
+    width: 100vw;
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      transform: scale(1.1);
+    }
   }
 </style>
