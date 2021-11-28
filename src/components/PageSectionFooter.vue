@@ -39,6 +39,7 @@ export default {
     border-radius: 10px;
     background-color: #ffffff;
     height: 36px;
+    color: #000000;
     font-weight: bold;
     text-align: center;
   }
