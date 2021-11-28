@@ -1,0 +1,20 @@
+{
+    "global": {
+      "languages": {
+        "english": "Inglés",
+        "japanese": "Japonés",
+        "spanish": "Español"
+      }
+    },
+    "PageSectionHeader": {
+      "title": "Generador de Identicon"
+    },
+    "PageSectionFooter": {
+      "numberOfGenerators": "1 Generador | {count} Generadors"
+    },
+    "OutputIdenticon": {
+      "title": "Generador de Identicon",
+      "instructions": "Escribe tu nombre aquí.",
+      "input": "ex: Kenny"
+    }
+  }

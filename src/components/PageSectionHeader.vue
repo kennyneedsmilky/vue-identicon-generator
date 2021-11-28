@@ -1,6 +1,6 @@
 <template>
   <div class=view>
-    <h2>Identicon Generator</h2>
+    <h2>{{ $t('PageSectionHeader.title') }}</h2>
     <div>
       <a href="https://github.com/kennyneedsmilky/vue-identicon-generator" target="_blank">
         <h2>

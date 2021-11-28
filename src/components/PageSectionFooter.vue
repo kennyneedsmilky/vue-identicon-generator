@@ -1,18 +1,25 @@
 <template>
   <div class="view">
     <p> &copy; {{ new Date().getFullYear() }} KenMil</p>
-    <select v-model="numberOfGenerators" name="Number of Generators" class="number-of-generators" @change="setGenerators">
-        <option value="1">1 Generator</option>
-        <option value="2">2 Generators</option>
-        <option value="3">3 Generators</option>
-        <option value="4">4 Generators</option>
-        <option value="5">5 Generators</option>
-        <option value="6">6 Generators</option>
-        <option value="7">7 Generators</option>
-        <option value="8">8 Generators</option>
-        <option value="9">9 Generators</option>
-        <option value="10">10 Generators</option>
-    </select>
+    <div>
+      <select v-model="language" name="language" class="language" @change="setLanguage">
+        <option value="en">{{ $t('global.languages.english') }}</option>
+        <option value="jp">{{ $t('global.languages.japanese') }}</option>
+        <option value="es">{{ $t('global.languages.spanish') }}</option>
+      </select>
+      <select v-model="numberOfGenerators" name="Number-of-Generators" class="number-of-generators" @change="setGenerators">
+          <option value="1">{{ $tc('PageSectionFooter.numberOfGenerators', 1) }}</option>
+          <option value="2">{{ $tc('PageSectionFooter.numberOfGenerators', 2) }}</option>
+          <option value="3">{{ $tc('PageSectionFooter.numberOfGenerators', 3) }}</option>
+          <option value="4">{{ $tc('PageSectionFooter.numberOfGenerators', 4) }}</option>
+          <option value="5">{{ $tc('PageSectionFooter.numberOfGenerators', 5) }}</option>
+          <option value="6">{{ $tc('PageSectionFooter.numberOfGenerators', 6) }}</option>
+          <option value="7">{{ $tc('PageSectionFooter.numberOfGenerators', 7) }}</option>
+          <option value="8">{{ $tc('PageSectionFooter.numberOfGenerators', 8) }}</option>
+          <option value="9">{{ $tc('PageSectionFooter.numberOfGenerators', 9) }}</option>
+          <option value="10">{{ $tc('PageSectionFooter.numberOfGenerators', 10) }}</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -22,22 +29,28 @@ export default {
   data() {
     return {
       numberOfGenerators: 1,
+      language: "en",
     }
   },
   methods: {
     setGenerators() {
       this.$emit('setGenerators', this.numberOfGenerators);
+    },
+    setLanguage() {
+      this.$i18n.locale = this.language;
     }
   },
 }
 </script>
 
 <style scoped>
-  .number-of-generators {
+  .number-of-generators, .language {
     padding: 5px;
     border: 1px solid #000000;
     border-radius: 10px;
     background-color: #ffffff;
+    margin-left: 4px;
+    margin-right: 4px;
     height: 36px;
     color: #000000;
     font-weight: bold;
