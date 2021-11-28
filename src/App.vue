@@ -40,6 +40,9 @@ export default {
       this.identiconQuantity = Number(num);
     }
   },
+  mounted() {
+    this.$i18n.locale = window.navigator.language || navigator.userLanguage || this.$i18n.locale;
+  }
 }
 </script>
 

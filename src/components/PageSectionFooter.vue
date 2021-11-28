@@ -3,9 +3,9 @@
     <p> &copy; {{ new Date().getFullYear() }} KenMil</p>
     <div>
       <select v-model="language" name="language" class="language" @change="setLanguage">
-        <option value="en">{{ $t('global.languages.english') }}</option>
-        <option value="jp">{{ $t('global.languages.japanese') }}</option>
-        <option value="es">{{ $t('global.languages.spanish') }}</option>
+        <option value="en-US">{{ $t('languages.english') }}</option>
+        <option value="ja-JP">{{ $t('languages.japanese') }}</option>
+        <option value="es">{{ $t('languages.spanish') }}</option>
       </select>
       <select v-model="numberOfGenerators" name="Number-of-Generators" class="number-of-generators" @change="setGenerators">
           <option value="1">{{ $tc('PageSectionFooter.numberOfGenerators', 1) }}</option>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       numberOfGenerators: 1,
-      language: "en",
+      language: window.navigator.language || navigator.userLanguage || this.$i18n.locale,
     }
   },
   methods: {

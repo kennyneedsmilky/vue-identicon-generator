@@ -1,10 +1,8 @@
 {
-  "global": {
-    "languages": {
-      "english": "English",
-      "japanese": "Japanese",
-      "spanish": "Spanish"
-    }
+  "languages": {
+    "english": "English",
+    "japanese": "Japanese",
+    "spanish": "Spanish"
   },
   "PageSectionHeader": {
     "title": "Identicon Generator"
