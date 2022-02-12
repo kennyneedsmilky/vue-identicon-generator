@@ -2,7 +2,7 @@
   <div class="view">
     <p> &copy; {{ new Date().getFullYear() }} KenMil</p>
     <div>
-      <select v-model="language" name="language" class="language" @change="setLanguage">
+      <select v-model="language" name="language" class="language" @change="setLanguage(language)">
         <option value="en-US">{{ $t('languages.english') }}</option>
         <option value="ja-JP">{{ $t('languages.japanese') }}</option>
         <option value="es">{{ $t('languages.spanish') }}</option>
@@ -28,17 +28,26 @@ export default {
   name: 'page-section-footer',
   data() {
     return {
+      language: window.navigator.language || null,
       numberOfGenerators: 1,
-      language: window.navigator.language || navigator.userLanguage || this.$i18n.locale,
+    };
+  },
+  mounted() {
+    if (localStorage.getItem('language')) this.language = localStorage.getItem('language');
+    if (this.language === 'en-US' || this.language === 'ja-JP' || this.language === 'es') {
+      this.setLanguage(this.language);
+      return;
     }
+    this.setLanguage('en-US');
   },
   methods: {
     setGenerators() {
       this.$emit('setGenerators', this.numberOfGenerators);
     },
-    setLanguage() {
-      this.$i18n.locale = this.language;
-    }
+    async setLanguage(lang) {
+      localStorage.setItem('language', lang);
+      this.$i18n.locale = await lang;
+    },
   },
 }
 </script>
