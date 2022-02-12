@@ -28,7 +28,7 @@ export default {
   name: 'page-section-footer',
   data() {
     return {
-      language: window.navigator.language || null,
+      language: window.navigator.language || 'en-US',
       numberOfGenerators: 1,
     };
   },
@@ -46,6 +46,7 @@ export default {
     },
     async setLanguage(lang) {
       localStorage.setItem('language', lang);
+      this.language = await lang;
       this.$i18n.locale = await lang;
     },
   },
